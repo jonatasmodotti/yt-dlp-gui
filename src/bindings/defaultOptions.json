@@ -1,0 +1,19 @@
+{
+  "audioOnly": false,
+  "audioFormat": "mp3",
+  "maxHeight": null,
+  "compatibleVideo": true,
+  "thumbnail": "off",
+  "subtitles": {
+    "enabled": false,
+    "includeAuto": true,
+    "languages": "en",
+    "format": "srt",
+    "embed": false
+  },
+  "bundle": false,
+  "playlist": false,
+  "cookies": {
+    "type": "none"
+  }
+}

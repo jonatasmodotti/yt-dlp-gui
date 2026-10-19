@@ -1,0 +1,79 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Node / Dependencies
+node_modules
+.pnpm-store
+
+# Build outputs
+dist
+dist-ssr
+coverage
+*.lcov
+
+# Caches and tooling
+.vite
+.vite-temp
+.vitest-cache
+*.tsbuildinfo
+.eslintcache
+
+# Environment & local configurations
+.env
+.env.*
+!.env.example
+!.env.template
+*.local
+*.local.json
+
+# Rust / Tauri
+target
+src-tauri/target
+src-tauri/gen/schemas
+**/*.rs.bk
+
+# Sensitive data / Cookies (Netscape format)
+cookies.txt
+*cookies*.txt
+*.cookies
+
+# yt-dlp temporary / partial download files
+*.part
+*.ytdl
+
+# OMC local state & agent sessions (skills are kept)
+**/.omc/*
+!**/.omc/skills/
+!**/.omc/skills/**
+
+# Claude Code / AI tooling
+.claude/settings.local.json
+
+# Editor & IDE directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.iml
+*.suo
+*.sw?
+*.sublime-workspace
+*.sublime-project
+
+# Operating System files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+ehthumbs_vista.db
+Thumbs.db
+Thumbs.db:encryptable
+[Dd]esktop.ini
+

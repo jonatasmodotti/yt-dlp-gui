@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+/* `dark:` utilities follow the `.dark` class set by src/theme.ts, not the OS. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Design tokens. Components use only these (bg-surface, text-muted, …), so a
+ * restyle is a token edit here, not a component hunt.
+ */
+:root {
+  --bg: oklch(0.985 0.002 270);
+  --surface: oklch(1 0 0);
+  --surface-2: oklch(0.965 0.004 270);
+  --line: oklch(0.91 0.006 270);
+  --fg: oklch(0.22 0.01 270);
+  --muted: oklch(0.52 0.012 270);
+  --accent: oklch(0.56 0.2 275);
+  --accent-fg: oklch(0.99 0 0);
+  --accent-soft: oklch(0.95 0.035 275);
+  --ok: oklch(0.6 0.15 155);
+  --warn: oklch(0.7 0.15 70);
+  --danger: oklch(0.58 0.2 25);
+  --shadow: 0 1px 2px oklch(0 0 0 / 0.04), 0 4px 16px oklch(0 0 0 / 0.04);
+}
+
+.dark {
+  --bg: oklch(0.16 0.008 270);
+  --surface: oklch(0.2 0.009 270);
+  --surface-2: oklch(0.245 0.01 270);
+  --line: oklch(0.3 0.012 270);
+  --fg: oklch(0.95 0.004 270);
+  --muted: oklch(0.68 0.012 270);
+  --accent: oklch(0.68 0.17 275);
+  --accent-fg: oklch(0.16 0.01 270);
+  --accent-soft: oklch(0.3 0.06 275);
+  --ok: oklch(0.72 0.15 155);
+  --warn: oklch(0.8 0.14 75);
+  --danger: oklch(0.7 0.17 25);
+  --shadow: 0 1px 2px oklch(0 0 0 / 0.3), 0 4px 16px oklch(0 0 0 / 0.25);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-soft: var(--accent-soft);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --color-danger: var(--danger);
+  --shadow-card: var(--shadow);
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-bg text-fg font-sans antialiased;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+input,
+textarea,
+code,
+pre,
+.selectable {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* Added briefly by applyTheme() so switching themes cross-fades. !important
+   is deliberate: it must win over component-level transitions. */
+/* biome-ignore-start lint/complexity/noImportantStyles: see above */
+.theme-transition,
+.theme-transition * {
+  transition:
+    background-color 220ms ease,
+    border-color 220ms ease,
+    color 220ms ease,
+    fill 220ms ease !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-transition,
+  .theme-transition * {
+    transition: none !important;
+  }
+}
+/* biome-ignore-end lint/complexity/noImportantStyles: see above */
