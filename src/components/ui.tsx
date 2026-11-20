@@ -20,12 +20,14 @@ export function Card({
   className?: string;
 }) {
   return (
-    <section className={cx("rounded-xl border border-line bg-surface p-4 shadow-card", className)}>
+    <section
+      className={cx("rounded-xl border border-line bg-surface p-3.5 shadow-card", className)}
+    >
       {title && (
-        <header className="mb-3 flex items-center gap-2">
-          {icon && <span className="text-muted [&>svg]:size-4">{icon}</span>}
-          <h2 className="text-[13px] font-semibold tracking-wide text-muted uppercase">{title}</h2>
-          <div className="ml-auto">{action}</div>
+        <header className="mb-2 flex flex-wrap items-center gap-2">
+          {icon && <span className="text-accent [&>svg]:size-4">{icon}</span>}
+          <h2 className="text-sm font-semibold">{title}</h2>
+          {action && <div className="ml-auto">{action}</div>}
         </header>
       )}
       {children}
@@ -44,7 +46,7 @@ export function Button({
     <button
       type="button"
       className={cx(
-        "inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium",
+        "inline-flex items-center justify-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm font-medium",
         "transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
         "disabled:cursor-not-allowed disabled:opacity-50 [&>svg]:size-4",
         variant === "primary" && "bg-accent text-accent-fg hover:brightness-110",
@@ -163,7 +165,7 @@ export function Select({ className, ...props }: SelectHTMLAttributes<HTMLSelectE
   return (
     <select
       className={cx(
-        "rounded-lg border border-line bg-surface-2 px-2.5 py-1.5 text-sm",
+        "max-w-full rounded-lg border border-line bg-surface-2 px-2.5 py-1.5 text-sm",
         "focus-visible:outline-2 focus-visible:outline-accent disabled:opacity-50",
         className,
       )}

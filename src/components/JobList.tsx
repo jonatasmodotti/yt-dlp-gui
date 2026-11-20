@@ -1,5 +1,6 @@
 import { revealItemInDir } from "@tauri-apps/plugin-opener";
 import {
+  ArrowDownToLine,
   CircleAlert,
   CircleCheck,
   CircleSlash,
@@ -40,7 +41,7 @@ export function JobList() {
       title={t("jobs.title")}
       icon={<ListVideo />}
       action={
-        <div className="flex gap-1">
+        <div className="flex flex-wrap justify-end gap-1">
           {queued.length > 0 &&
             (paused ? (
               <Button variant="ghost" className="py-1 text-xs" onClick={resume}>
@@ -66,7 +67,10 @@ export function JobList() {
     >
       {paused && queued.length > 0 && <QueueBanner pause={paused} waiting={queued.length} />}
       {order.length === 0 && queued.length === 0 ? (
-        <p className="py-6 text-center text-sm text-muted">{t("jobs.empty")}</p>
+        <div className="flex items-center gap-3 rounded-lg border border-dashed border-line bg-bg px-3 py-3 text-sm text-muted">
+          <ArrowDownToLine className="size-4 shrink-0 text-accent" />
+          <p>{t("jobs.empty")}</p>
+        </div>
       ) : (
         <ul className="space-y-2">
           <QueuedList items={queued} />

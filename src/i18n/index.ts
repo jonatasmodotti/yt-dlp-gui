@@ -63,4 +63,3 @@ export function useI18n() {
   const tr = useCallback((text: string) => translateText(text, language), [language]);
   return { language, t, tr };
 }
-

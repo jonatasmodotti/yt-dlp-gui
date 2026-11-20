@@ -55,4 +55,3 @@ describe("i18n", () => {
     expect(postprocessorLabel("Custom", tPt)).toBe("Pós-processando (Custom)");
   });
 });
-

@@ -18,11 +18,13 @@ export const pt: Translations = {
   "engineBanner.setUp": "Configurar",
 
   // URL bar
+  "urlBar.title": "Novo download",
   "urlBar.placeholder": "Cole o link de um vídeo ou playlist…",
   "urlBar.ariaLabel": "URL do vídeo ou playlist",
   "urlBar.batchPlaceholder":
     "Cole os links, um por linha…\nhttps://www.youtube.com/watch?v=…\nhttps://youtu.be/…",
   "urlBar.batchAriaLabel": "Links para baixar, um por linha",
+  "urlBar.paste": "Colar",
   "urlBar.pasteAriaLabel": "Colar da área de transferência",
   "urlBar.batch": "Lote",
   "urlBar.batchTitleSingle": "Voltar para um único link",
@@ -30,13 +32,15 @@ export const pt: Translations = {
   "urlBar.download": "Baixar",
   "urlBar.downloadCount": "Baixar {count}",
   "urlBar.noLinksYet": "Nenhum link ainda",
-  "urlBar.batchCountOne": "1 link · usa as opções abaixo",
-  "urlBar.batchCountOther": "{count} links · usa as opções abaixo",
+  "urlBar.batchCountOne": "1 link",
+  "urlBar.batchCountOther": "{count} links",
   "urlBar.addedQueueOne": "1 link adicionado à fila.",
   "urlBar.addedQueueOther": "{count} links adicionados à fila.",
   "urlBar.clipboardError": "Não foi possível ler a área de transferência.",
 
   // Format card
+  "format.advanced": "Opções avançadas",
+  "format.quick": "Opções de download",
   "format.title": "Formato",
   "format.downloadAll": "Baixar tudo",
   "format.downloadAllDesc":

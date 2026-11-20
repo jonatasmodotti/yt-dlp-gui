@@ -94,13 +94,13 @@ export function UrlBar({ url, onUrlChange }: { url: string; onUrlChange: (url: s
   }
 
   const frame = cx(
-    "flex gap-2 rounded-xl border bg-surface p-1.5 pl-3 shadow-card transition-colors",
-    "focus-within:border-accent",
+    "flex min-w-0 items-center gap-2.5 rounded-lg border bg-surface px-3 transition-colors",
+    "focus-within:border-accent focus-within:ring-2 focus-within:ring-accent/20",
     error ? "border-danger" : "border-line",
   );
   const batchButton = (
     <Button
-      variant="ghost"
+      variant="secondary"
       onClick={toggleBatch}
       aria-pressed={batch}
       title={batch ? t("urlBar.batchTitleSingle") : t("urlBar.batchTitleMultiple")}
@@ -111,9 +111,18 @@ export function UrlBar({ url, onUrlChange }: { url: string; onUrlChange: (url: s
   );
 
   return (
-    <form onSubmit={start} className="space-y-2">
+    <form
+      onSubmit={start}
+      className="download-composer space-y-3 rounded-xl border border-line p-3.5 shadow-card"
+    >
+      <div className="flex items-center gap-2">
+        <span className="grid size-8 place-items-center rounded-lg bg-accent-soft text-accent">
+          <ArrowDownToLine className="size-4" />
+        </span>
+        <h2 className="text-lg font-semibold tracking-tight">{t("urlBar.title")}</h2>
+      </div>
       {batch ? (
-        <div className={cx(frame, "flex-col pr-1.5")}>
+        <div className={frame}>
           <textarea
             // biome-ignore lint/a11y/noAutofocus: switching to batch mode moves focus here
             autoFocus
@@ -122,35 +131,16 @@ export function UrlBar({ url, onUrlChange }: { url: string; onUrlChange: (url: s
             onKeyDown={(e) => {
               if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) start(e);
             }}
-            rows={5}
+            rows={4}
             placeholder={t("urlBar.batchPlaceholder")}
             aria-label={t("urlBar.batchAriaLabel")}
             spellCheck={false}
-            className="min-h-24 w-full resize-y bg-transparent py-2 font-mono text-[13px] leading-relaxed outline-none placeholder:text-muted"
+            className="min-h-24 w-full resize-y bg-transparent py-2.5 font-mono text-[13px] leading-relaxed outline-none placeholder:text-muted"
           />
-          <div className="flex items-center gap-2 border-t border-line pt-1.5">
-            <span className="mr-auto text-xs text-muted">
-              {batchUrls.length === 0
-                ? t("urlBar.noLinksYet")
-                : batchUrls.length === 1
-                  ? t("urlBar.batchCountOne")
-                  : t("urlBar.batchCountOther", { count: batchUrls.length })}
-            </span>
-            <Button variant="ghost" onClick={paste} aria-label={t("urlBar.pasteAriaLabel")}>
-              <ClipboardPaste />
-            </Button>
-            {batchButton}
-            <Button type="submit" variant="primary" disabled={batchUrls.length === 0}>
-              <ArrowDownToLine />
-              {batchUrls.length > 1
-                ? t("urlBar.downloadCount", { count: batchUrls.length })
-                : t("urlBar.download")}
-            </Button>
-          </div>
         </div>
       ) : (
-        <div className={cx(frame, "items-center")}>
-          <Link2 className="size-5 shrink-0 text-muted" />
+        <div className={frame}>
+          <Link2 className="size-4 shrink-0 text-muted" />
           <input
             // biome-ignore lint/a11y/noAutofocus: the URL field is the app's primary action
             autoFocus
@@ -163,19 +153,43 @@ export function UrlBar({ url, onUrlChange }: { url: string; onUrlChange: (url: s
             onPaste={onPasteSingle}
             placeholder={t("urlBar.placeholder")}
             aria-label={t("urlBar.ariaLabel")}
+            inputMode="url"
             spellCheck={false}
-            className="min-w-0 flex-1 bg-transparent py-2 text-[15px] outline-none placeholder:text-muted"
+            className="min-w-0 flex-1 bg-transparent py-2.5 text-sm outline-none placeholder:text-muted"
           />
-          <Button variant="ghost" onClick={paste} aria-label={t("urlBar.pasteAriaLabel")}>
-            <ClipboardPaste />
-          </Button>
-          {batchButton}
-          <Button type="submit" variant="primary" disabled={!url.trim() || starting}>
-            <ArrowDownToLine />
-            {t("urlBar.download")}
-          </Button>
         </div>
       )}
+      <div className="flex flex-wrap items-center gap-2">
+        <Button
+          variant="secondary"
+          onClick={paste}
+          title={t("urlBar.pasteAriaLabel")}
+          aria-label={t("urlBar.pasteAriaLabel")}
+        >
+          <ClipboardPaste /> {t("urlBar.paste")}
+        </Button>
+        {batchButton}
+        {batch && (
+          <span className="text-xs text-muted">
+            {batchUrls.length === 0
+              ? t("urlBar.noLinksYet")
+              : batchUrls.length === 1
+                ? t("urlBar.batchCountOne")
+                : t("urlBar.batchCountOther", { count: batchUrls.length })}
+          </span>
+        )}
+        <Button
+          type="submit"
+          variant="primary"
+          className="ml-auto"
+          disabled={batch ? batchUrls.length === 0 : !url.trim() || starting}
+        >
+          <ArrowDownToLine />
+          {batch && batchUrls.length > 1
+            ? t("urlBar.downloadCount", { count: batchUrls.length })
+            : t("urlBar.download")}
+        </Button>
+      </div>
       {error && (
         <p role="alert" className="px-1 text-sm text-danger">
           {error}

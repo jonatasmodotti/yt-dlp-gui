@@ -33,4 +33,3 @@ export function detectLanguage(locale?: string): Language {
   const code = raw.split(/[-_]/)[0]?.toLowerCase();
   return isLanguage(code) ? code : "en";
 }
-

@@ -1,11 +1,11 @@
 import { open } from "@tauri-apps/plugin-dialog";
 import { revealItemInDir } from "@tauri-apps/plugin-opener";
-import { FolderOpen, HardDrive } from "lucide-react";
+import { FolderOpen } from "lucide-react";
 import { useI18n } from "../i18n";
 import { usePrefs } from "../store/prefs";
-import { Button, Card } from "./ui";
+import { Button, Field } from "./ui";
 
-export function OutputCard() {
+export function OutputField() {
   const dir = usePrefs((s) => s.outputDir);
   const setDir = usePrefs((s) => s.setOutputDir);
   const { t } = useI18n();
@@ -20,10 +20,10 @@ export function OutputCard() {
   }
 
   return (
-    <Card title={t("output.title")} icon={<HardDrive />}>
-      <div className="flex items-center gap-2">
+    <Field label={t("output.title")}>
+      <div className="flex min-w-0 flex-1 items-center gap-1.5">
         <code
-          className="min-w-0 flex-1 truncate rounded-lg bg-surface-2 px-3 py-2 font-mono text-xs"
+          className="min-w-0 flex-1 truncate rounded-lg bg-surface-2 px-2.5 py-2 font-mono text-xs"
           title={dir}
         >
           {dir || t("output.noFolder")}
@@ -32,12 +32,13 @@ export function OutputCard() {
         <Button
           variant="ghost"
           aria-label={t("output.showFolder")}
+          title={t("output.showFolder")}
           disabled={!dir}
           onClick={() => revealItemInDir(dir)}
         >
           <FolderOpen />
         </Button>
       </div>
-    </Card>
+    </Field>
   );
 }

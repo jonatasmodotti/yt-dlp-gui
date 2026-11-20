@@ -3,6 +3,7 @@ import type { AudioFormat } from "../bindings/AudioFormat";
 import type { ThumbnailMode } from "../bindings/ThumbnailMode";
 import { type TranslationKey, useI18n } from "../i18n";
 import { usePrefs } from "../store/prefs";
+import { OutputField } from "./OutputField";
 import { Card, Field, Segmented, Select, Switch } from "./ui";
 
 const HEIGHTS = [null, 2160, 1440, 1080, 720, 480] as const;
@@ -20,23 +21,8 @@ export function FormatCard() {
   const locked = o.bundle;
 
   return (
-    <Card title={t("format.title")} icon={<SlidersHorizontal />}>
-      <div
-        className={
-          o.bundle
-            ? "mb-3 rounded-lg border border-accent/40 bg-accent-soft px-3"
-            : "mb-3 rounded-lg border border-line px-3"
-        }
-      >
-        <Switch
-          checked={o.bundle}
-          onChange={(bundle) => set({ bundle })}
-          label={t("format.downloadAll")}
-          description={t("format.downloadAllDesc")}
-        />
-      </div>
-
-      <div className="space-y-1">
+    <Card title={t("format.quick")} icon={<SlidersHorizontal />}>
+      <div className="divide-y divide-line">
         <Field label={t("format.type")}>
           <Segmented
             label={t("format.mediaType")}
@@ -79,7 +65,41 @@ export function FormatCard() {
           </Field>
         )}
 
-        {(!o.audioOnly || locked) && (
+        <OutputField />
+      </div>
+      {locked && (
+        <p className="mt-2 flex items-center gap-1.5 text-xs text-muted">
+          <Package className="size-3.5" /> {t("format.lockedByDownloadAll")}
+        </p>
+      )}
+    </Card>
+  );
+}
+
+export function FormatExtras() {
+  const o = usePrefs((s) => s.options);
+  const set = usePrefs((s) => s.setOptions);
+  const { t } = useI18n();
+
+  return (
+    <Card title={t("format.title")} icon={<SlidersHorizontal />}>
+      <div
+        className={
+          o.bundle
+            ? "mb-3 rounded-lg border border-accent/40 bg-accent-soft px-3"
+            : "mb-3 rounded-lg border border-line px-3"
+        }
+      >
+        <Switch
+          checked={o.bundle}
+          onChange={(bundle) => set({ bundle })}
+          label={t("format.downloadAll")}
+          description={t("format.downloadAllDesc")}
+        />
+      </div>
+
+      <div className="divide-y divide-line">
+        {(!o.audioOnly || o.bundle) && (
           <Switch
             checked={o.compatibleVideo}
             onChange={(compatibleVideo) => set({ compatibleVideo })}
@@ -91,8 +111,8 @@ export function FormatCard() {
         <Field label={t("format.thumbnail")}>
           <Select
             aria-label={t("format.thumbnail")}
-            disabled={locked}
-            value={locked ? "both" : o.thumbnail}
+            disabled={o.bundle}
+            value={o.bundle ? "both" : o.thumbnail}
             onChange={(e) => set({ thumbnail: e.target.value as ThumbnailMode })}
           >
             {THUMBNAILS.map((item) => (
@@ -110,11 +130,6 @@ export function FormatCard() {
           description={t("format.wholePlaylistDesc")}
         />
       </div>
-      {locked && (
-        <p className="mt-2 flex items-center gap-1.5 text-xs text-muted">
-          <Package className="size-3.5" /> {t("format.lockedByDownloadAll")}
-        </p>
-      )}
     </Card>
   );
 }

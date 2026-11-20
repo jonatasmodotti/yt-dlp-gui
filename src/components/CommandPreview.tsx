@@ -73,8 +73,8 @@ export function CommandPreview({ url }: { url: string }) {
         </p>
       ))}
       <details className="group rounded-xl border border-line bg-surface">
-        <summary className="flex cursor-pointer list-none items-center gap-2 px-4 py-2.5 text-sm text-muted hover:text-fg">
-          <Terminal className="size-4" />
+        <summary className="disclosure flex items-center gap-2 px-3.5 py-3 text-sm text-muted hover:bg-surface-2 hover:text-fg">
+          <Terminal className="size-4 text-accent" />
           {t("preview.title")}
           {platform === "windows" ? " (PowerShell)" : ""}
           <span className="ml-auto text-xs group-open:hidden">{t("preview.show")}</span>

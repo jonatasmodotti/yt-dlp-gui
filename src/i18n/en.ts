@@ -22,11 +22,13 @@ export const en = {
   "engineBanner.setUp": "Set up",
 
   // URL bar
+  "urlBar.title": "New download",
   "urlBar.placeholder": "Paste a video or playlist link…",
   "urlBar.ariaLabel": "Video or playlist URL",
   "urlBar.batchPlaceholder":
     "Paste links, one per line…\nhttps://www.youtube.com/watch?v=…\nhttps://youtu.be/…",
   "urlBar.batchAriaLabel": "Links to download, one per line",
+  "urlBar.paste": "Paste",
   "urlBar.pasteAriaLabel": "Paste from clipboard",
   "urlBar.batch": "Batch",
   "urlBar.batchTitleSingle": "Back to a single link",
@@ -34,13 +36,15 @@ export const en = {
   "urlBar.download": "Download",
   "urlBar.downloadCount": "Download {count}",
   "urlBar.noLinksYet": "No links yet",
-  "urlBar.batchCountOne": "1 link · uses the options below",
-  "urlBar.batchCountOther": "{count} links · uses the options below",
+  "urlBar.batchCountOne": "1 link",
+  "urlBar.batchCountOther": "{count} links",
   "urlBar.addedQueueOne": "Added 1 link to the queue.",
   "urlBar.addedQueueOther": "Added {count} links to the queue.",
   "urlBar.clipboardError": "Couldn't read the clipboard.",
 
   // Format card
+  "format.advanced": "Advanced options",
+  "format.quick": "Download options",
   "format.title": "Format",
   "format.downloadAll": "Download all",
   "format.downloadAllDesc":

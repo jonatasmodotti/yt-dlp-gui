@@ -1,6 +1,6 @@
 # yt-dlp GUI
 
-A modern, cross-platform desktop app (macOS, Windows, Linux) for
+**Video Downloader** is a cross-platform desktop app (macOS, Windows, Linux) for
 [yt-dlp](https://github.com/yt-dlp/yt-dlp). Paste a link and get a
 best-quality MP4, or pick options with toggles instead of command-line flags.
 
